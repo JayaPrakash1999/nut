@@ -23,13 +23,14 @@ bool _isLoading=false;
   @override
   void initState() {
     super.initState();
-    existingUser();
+    
      _mainLogoAnimationController = new AnimationController(
-        duration: new Duration(milliseconds: 1500), vsync: this);
+        duration: new Duration(milliseconds: 2000), vsync: this);
     _mainLogoAnimation = new CurvedAnimation(
         parent: _mainLogoAnimationController, curve: Curves.easeIn);
     _mainLogoAnimation.addListener(() => (this.setState(() {})));
     _mainLogoAnimationController.forward();
+    existingUser();
   }
 
 
@@ -46,6 +47,10 @@ FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
     if(_docSnap.data['subscription'])
      Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
+    else
+    {
+      Navigator.pushNamed(context,"/subs");
+    }
   }
   else{
 
