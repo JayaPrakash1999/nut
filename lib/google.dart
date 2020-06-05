@@ -52,13 +52,18 @@ Future<String> signInWithGoogle(BuildContext context) async {
 
    final AuthResult _authResult = await _auth.signInWithCredential(credential);
     if (_authResult.additionalUserInfo.isNewUser) {
+      print("new user");
       _user.uid = _authResult.user.uid;
       _user.email = _authResult.user.email;
       _user.fname = _authResult.user.displayName;
+      _user.photoUrl=_authResult.user.photoUrl.toString();
+      print("name"+_user.fname);
+      print(_user.photoUrl);
       OurDatabase().createUser(_user);
       Navigator.pushNamedAndRemoveUntil(context, '/subs', (_)=> false);
     }
     else {
+      print("existing user");
        Navigator.pushNamedAndRemoveUntil(context, "/home",  (_)=> false);
     }
     _currentUser = await OurDatabase().getUserInfo(_authResult.user.uid);

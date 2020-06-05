@@ -11,6 +11,7 @@ class Users{
   String uid;
   String phone;
   String group;
+  String photoUrl;
   Timestamp accountCreated;
 
 Users({
@@ -25,6 +26,7 @@ Users({
   this.phone,
   this.group,
   this.accountCreated,
+  this.photoUrl
 });
 
 }

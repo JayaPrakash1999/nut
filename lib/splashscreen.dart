@@ -52,8 +52,8 @@ FirebaseUser user = await FirebaseAuth.instance.currentUser();
       // Navigator.pushNamedAndRemoveUntil(context, '/intro', (_) => false);
     // goToLoginPage();
     
- await new Future.delayed(const Duration(milliseconds: 2000));
-      Navigator.pushNamedAndRemoveUntil(context, "/Login", (_) => false);
+//  await new Future.delayed(const Duration(milliseconds: 2000));
+      Navigator.pushNamedAndRemoveUntil(context, "/intro", (_) => false);
   
   }
  }catch(e){

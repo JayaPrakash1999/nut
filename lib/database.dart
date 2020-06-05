@@ -23,6 +23,7 @@ FirebaseUser uid = await FirebaseAuth.instance.currentUser();
         'phone': user.phone,
         'group': user.group,
         'accountCreated': Timestamp.now(),
+        'photoUrl': user.photoUrl
       });
        print("Uploaded Info successfully in Firebase");
       retVal = "success";
@@ -53,6 +54,7 @@ FirebaseUser uid = await FirebaseAuth.instance.currentUser();
       retVal.phone = _docSnapshot.data["phone"];
       retVal.group = _docSnapshot.data["group"];
       retVal.accountCreated = _docSnapshot.data["accountCreated"];
+      retVal.photoUrl= _docSnapshot.data["photoUrl"];
      
     
     } catch (e) {
@@ -69,21 +71,21 @@ FirebaseUser uid = await FirebaseAuth.instance.currentUser();
 
 // Future<String> updateDetails(Users user) async {
 //     String retVal = "error";
-
+//     print("called for updating info");
 //     try {
 //       await _firestore.collection("users").document(user.uid).updateData({
-//         'OrderID': user.sID,
+//         // 'OrderID': user.sID,
 //         'first Name': user.fname,
 //         'Last Name': user.lname,
-//         'email': user.email,
+//         // 'email': user.email,
 //         'school': user.school,
 //         'class': user.grade,
 //         'city': user.city,
-//         'phone': user.phone,
+//         // 'phone': user.phone,
 //         'group': user.group,
-//         'accountCreated': Timestamp.now(),
+//         // 'accountCreated': Timestamp.now(),
 //       });
-//        print("Uploaded Info successfully in Firebase");
+//        print("Updated Info successfully in Firebase");
 //       retVal = "success";
 //     } catch (e) {
 //       print(e);
@@ -111,6 +113,32 @@ FirebaseUser uid = await FirebaseAuth.instance.currentUser();
     }
 
     return retVal;
+  }
+
+  void updateDetails(Users currentUser) async {
+
+    // String retVal = "error";
+    print("called for updating info");
+    try {
+      await _firestore.collection("users").document(currentUser.uid).updateData({
+        // 'OrderID': user.sID,
+        'first Name': currentUser.fname,
+        'Last Name': currentUser.lname,
+        // 'email': user.email,
+        'school': currentUser.school,
+        'class': currentUser.grade,
+        'city': currentUser.city,
+        // 'phone': user.phone,
+        'group': currentUser.group,
+        // 'accountCreated': Timestamp.now(),
+      });
+       print("Updated Info successfully in Firebase");
+      // retVal = "success";
+    } catch (e) {
+      print(e);
+    }
+
+    // return retVal;
   }
 
   }

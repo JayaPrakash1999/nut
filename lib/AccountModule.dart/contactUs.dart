@@ -73,7 +73,7 @@ class ContactUs extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Terms and Conditions",style: TextStyle(color: Colors.black),),
+          title: Text("Contact US",style: TextStyle(color: Colors.black),),
           backgroundColor:Colors.orange[300],
           leading: new IconButton(
           icon: Icon(
@@ -106,7 +106,7 @@ class ContactUs extends StatelessWidget {
   _buildBody(context) {
     return SizedBox(
       // width: MediaQuery.of(context).size.width * 0.8,
-      // height: MediaQuery.of(context).size.width * 0.95,
+      // height: MediaQuery.of(context).size.width * 0.7,
       // margin: EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,13 +115,13 @@ class ContactUs extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Image.asset('assets/images/logo.png', fit: BoxFit.fitHeight, width: MediaQuery.of(context).size.width * 0.95, height: 100),
           ),
-          Text("Nutshell",
-            style: TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.w500,
-              fontSize: 20
-            ),
-          ),
+          // Text("Nutshell",
+          //   style: TextStyle(
+          //     color: Colors.green,
+          //     fontWeight: FontWeight.w500,
+          //     fontSize: 20
+          //   ),
+          // ),
           Padding(padding:EdgeInsets.all(10.0)),
           Text("If you have any questions or feedback, please reach out to us:",
             
@@ -134,18 +134,26 @@ class ContactUs extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.width * 0.3,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    child: Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text("ADDRESS", style: TextStyle(color: Colors.green, fontSize: 12),),
-                      SizedBox(height: 10,),
-                      Text("Quizzora & Co., 2nd Floor, Basera Apartment,  Hill Cart Road", style: TextStyle(color: Colors.black, fontSize: 16),),
-                      Text(" 13/6 B.M. Saran, Mahananda Para, Near Bata Lane,", style: TextStyle(color: Colors.black, fontSize: 16),),
-                      Text(" Siliguri - 734001", style: TextStyle(color: Colors.black, fontSize: 16),),
+                      SizedBox(height: 75,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Text(" \nQuizzora & Co., 2nd Floor, Basera Apartment, Hill Cart, Road, 13/6 B.M. Saran, Mahananda Para, Near Bata Lane,Siliguri - 734001", style: TextStyle(color: Colors.black, fontSize: 16),)
+                      ),
+                      // Text(" ", style: TextStyle(color: Colors.black, fontSize: 16),),
+                      // Text(" ", style: TextStyle(color: Colors.black, fontSize: 16),),
                       // Text(" Siliguri - 734001", style: TextStyle(color: Colors.green, fontSize: 16),)
                     ],
                   ),
+                ),
                 ),
                 InkWell(
                   onTap: () {
@@ -162,7 +170,7 @@ class ContactUs extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("PHONE", style: TextStyle(color: Colors.green,fontSize: 12)),
+                Text("     PHONE", style: TextStyle(color: Colors.green,fontSize: 12)),
               ],
             ),
           ),
@@ -171,10 +179,25 @@ class ContactUs extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text("8617587964", style: TextStyle(color: Colors.black, fontSize: 16)),
+                Text("    8617587964", style: TextStyle(color: Colors.black, fontSize: 16)),
                 InkWell(
                   onTap: () {
                     _LaunchPhone("8617587964");
+                  },
+                  child: Icon(Icons.phone, color: Colors.green,)
+                )
+              ],
+            ),
+          ),
+           Container(
+            margin: EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("    9647837544", style: TextStyle(color: Colors.black, fontSize: 16)),
+                InkWell(
+                  onTap: () {
+                    _LaunchPhone("9647837544");
                   },
                   child: Icon(Icons.phone, color: Colors.green,)
                 )
@@ -187,17 +210,17 @@ class ContactUs extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("EMAIL", style: TextStyle(color: Colors.green, fontSize: 12)),
+                Text("    EMAIL", style: TextStyle(color: Colors.green, fontSize: 12)),
               ],
             )
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("quizzora@gmail.com", style: TextStyle(color: Colors.black, fontSize: 16)),
+              Text("    info@mynutshell.in", style: TextStyle(color: Colors.black, fontSize: 16)),
               InkWell(
                 onTap: () {
-                  _launchEmail("quizzora@gmail.com");
+                  _launchEmail("info@mynutshell.in");
                 },
                 child: Icon(Icons.email, color: Colors.green,)
               )
