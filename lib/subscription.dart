@@ -223,12 +223,12 @@ class _SubscriptionState extends State<Subscription> {
 void openCheckout() async {
   
   print("Just came to opencheckout function");
-    print(_currentUser.uid);
+    // print(_currentUser.uid);
 
   var onemonth = {
-    'key': 'rzp_test_b3k6BBYp7rce8M',
+    'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
-    'amount': 6900, //in the smallest currency sub-unit.
+    'amount': 1.0, //in the smallest currency sub-unit.
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'One month Nutshell Subscription',
@@ -249,9 +249,9 @@ void openCheckoutthree() async {
   
   print("Just came to checkout3 function");
   var threemonths = {
-    'key': 'rzp_test_b3k6BBYp7rce8M',
+    'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
-    'amount': 16800, //in the smallest currency sub-unit.
+    'amount': 1.2, //in the smallest currency sub-unit.
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
@@ -272,9 +272,9 @@ void openCheckoutyear() async {
   
   print("Just came to checkoutyear function");
   var oneyear = {
-    'key': 'rzp_test_b3k6BBYp7rce8M',
+    'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
-    'amount': 29900, //in the smallest currency sub-unit.
+    'amount': 1.3, //in the smallest currency sub-unit.
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
@@ -317,6 +317,7 @@ void openCheckoutweek() async {
 
 
 void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+  print("razorpay success");
   // String selectedPlan=global.subPlan;
   Fluttertoast.showToast(
     msg: "SUCCESS: " + response.paymentId,
@@ -334,6 +335,9 @@ FirebaseUser user = await FirebaseAuth.instance.currentUser();
     "subscription": true
 });
     print("updated");
+    // Navigator.pushNamed(context,"/home");
+    HomeScreen();
+
 
 }
 catch(e){
@@ -344,9 +348,9 @@ print("account page");
   HomeScreen();
   }
   
-//  navigator(BuildContext context){
-//     Navigator.pushNamedAndRemoveUntil(context, '/HomeScreen', (route) => false);
-//     }
+ navigator(BuildContext context){
+    Navigator.pushNamedAndRemoveUntil(context, '/HomeScreen', (route) => false);
+    }
 
 void _handlePaymentError(PaymentFailureResponse response) {
   Fluttertoast.showToast(

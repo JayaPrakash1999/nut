@@ -113,9 +113,9 @@ bool isLoading=false;
         isLoading=true;
       });
       FirebaseUser _firebaseUser = await _auth.currentUser();
-      print(_firebaseUser.email);
+      // print(_firebaseUser.email);
       if (_firebaseUser != null) {
-        print(_firebaseUser.uid);
+        // print(_firebaseUser.uid);
         _currentUser = await OurDatabase().getUserInfo(_firebaseUser.uid);
         if (_currentUser != null) {
           retVal = "success";
@@ -143,7 +143,7 @@ bool isLoading=false;
 
   @override
   Widget build(BuildContext context) {
-    print("jp"+_currentUser.photoUrl.toString());
+    // print("jp"+_currentUser.photoUrl.toString());
     return WillPopScope(
     onWillPop: (){
       Navigator.pushNamed(context,"/home");

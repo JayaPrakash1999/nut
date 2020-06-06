@@ -369,7 +369,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       setState(() {
         isLoading=true;
-        _dropformSelected=_currentUser.group==null?"Group-A":_currentUser.group.toString();
+        _dropformSelected=_currentUser.group==null?"Select Group":_currentUser.group.toString();
        
 
       });
@@ -548,9 +548,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   //   );
   // }
 var _dropforms= [
-   'Group-A','Group-B'
+   'Select Group','Group-A','Group-B'
   ]; 
-  var _dropformSelected="Group-A";
+  var _dropformSelected;
 
   
 
@@ -669,9 +669,11 @@ var _dropforms= [
           width: 320,
           child: Column(
             children: <Widget>[
+              
               Text("Select Group",style: TextStyle(color:Colors.black,fontSize: 20.0),),
               Text("\n1. Group A Suitable for students of ages 9-12\n2. Suitable for students of ages 13-1"),
               // Text("Suitable for students of ages 9-12")"),)
+              // Padding.EdgeInsets.only()
 
             ],
           ),

@@ -285,6 +285,7 @@ FirebaseUser user = await FirebaseAuth.instance.currentUser();
  print(user.toString());
 
   if(user!=null ){
+    
      DocumentSnapshot _docSnap = await _firestore.collection("users").document(user.uid).get();
     
     await new Future.delayed(const Duration(milliseconds: 5000));  

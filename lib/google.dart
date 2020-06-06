@@ -47,7 +47,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
   Users _user = Users();
 
   try {
-    
+    print("trying jp to login with mail");
     GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication _googleAuth = await _googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
@@ -57,6 +57,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
    
   FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (_authResult.additionalUserInfo.isNewUser) {
+
       print("new user");
       _user.uid = _authResult.user.uid;
       _user.email = _authResult.user.email;
@@ -67,7 +68,19 @@ Future<String> signInWithGoogle(BuildContext context) async {
       OurDatabase().createUser(_user);
       Navigator.pushNamedAndRemoveUntil(context, '/subs', (_)=> false);
     }
+
     else {
+      FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  print("current user id");
+  print(user.uid);
+  
+   final Firestore fireStore =  Firestore.instance;
+
+  await fireStore.collection("users").document(user.uid).updateData({
+    "photoUrl":_authResult.user.photoUrl.toString()
+    // "subscription": true
+});
+      
       print("existing user");
       DocumentSnapshot _docSnap = await _firestore.collection("users").document(user.uid).get();
     
@@ -90,7 +103,9 @@ Future<String> signInWithGoogle(BuildContext context) async {
     }
   } on PlatformException catch (e) {
     retVal = e.message;
-  } catch (e) {
+  } catch (e) 
+  {
+    
     print(e);
   }
 
