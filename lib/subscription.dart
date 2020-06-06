@@ -228,7 +228,7 @@ void openCheckout() async {
   var onemonth = {
     'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
-    'amount': 1.0, //in the smallest currency sub-unit.
+    'amount': 110, //in the smallest currency sub-unit.
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'One month Nutshell Subscription',
@@ -251,7 +251,7 @@ void openCheckoutthree() async {
   var threemonths = {
     'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
-    'amount': 1.2, //in the smallest currency sub-unit.
+    'amount': 120, //in the smallest currency sub-unit.
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
@@ -274,7 +274,7 @@ void openCheckoutyear() async {
   var oneyear = {
     'key': 'rzp_live_A94dLEeQb2Cj5s',
     'currency': "INR",
-    'amount': 1.3, //in the smallest currency sub-unit.
+    'amount': 130, //in the smallest currency sub-unit.
     'name': 'Nutshell',
     //'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
     'description': 'Nutshell Subscription',
