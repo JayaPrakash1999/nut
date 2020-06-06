@@ -23,7 +23,8 @@ FirebaseUser uid = await FirebaseAuth.instance.currentUser();
         'phone': user.phone,
         'group': user.group,
         'accountCreated': Timestamp.now(),
-        'photoUrl': user.photoUrl
+        'photoUrl': user.photoUrl,
+        'subPlan': user.subPlan
       });
        print("Uploaded Info successfully in Firebase");
       retVal = "success";
@@ -55,6 +56,7 @@ FirebaseUser uid = await FirebaseAuth.instance.currentUser();
       retVal.group = _docSnapshot.data["group"];
       retVal.accountCreated = _docSnapshot.data["accountCreated"];
       retVal.photoUrl= _docSnapshot.data["photoUrl"];
+      retVal.subPlan= _docSnapshot.data["subPlan"];
      
     
     } catch (e) {

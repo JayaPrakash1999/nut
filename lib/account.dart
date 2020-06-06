@@ -143,6 +143,7 @@ bool isLoading=false;
 
   @override
   Widget build(BuildContext context) {
+    print("jp"+_currentUser.photoUrl.toString());
     return WillPopScope(
     onWillPop: (){
       Navigator.pushNamed(context,"/home");
@@ -166,7 +167,7 @@ bool isLoading=false;
         ],
         // title: new Text("Account Details",style: TextStyle(color:Colors.black,fontSize: 30.0),),
         backgroundColor: Colors.orange[2000],
-        elevation: 10.0,
+        elevation: 5.0,
 
         
         // leading: new IconButton(
@@ -240,16 +241,21 @@ bool isLoading=false;
         Center(child:  SizedBox(
                   height: 130.0,
                   width: 130.0,
-                  child: ClipRRect(
+                  child: 
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(100.0),
                     child:
-                    _currentUser.photoUrl.toString()==null?
+                    _currentUser.photoUrl.toString()=="null"?
+                    // Text("No image")
+                    // Image.network("https://nofrdz.com/images/l.png")
                     Icon(Icons.account_circle,
                     size:120
-                    ):Image.network(_currentUser.photoUrl.toString())
+                    )
+                    :Image.network(_currentUser.photoUrl.toString())
                     //  Image.asset("assets/images/userimg.png")
                   ),
-                ),),
+                ),
+                ),
           Center(child:   Text(
                           _currentUser.fname.toString()+" "+_currentUser.lname.toString(),
                           textAlign: TextAlign.end,
@@ -266,6 +272,14 @@ bool isLoading=false;
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w500),
                         ),),
+                        //  Center(child:   Text(
+                        //   _currentUser.subPlan.toString(),
+                        //   textAlign: TextAlign.end,
+                        //   style: TextStyle(
+                        //       fontSize: 20.0,
+                        //       fontFamily: 'Montserrat',
+                        //       fontWeight: FontWeight.w500),
+                        // ),),
         // SizedBox(
         //   height: MediaQuery.of(context).size.height * 0.15,
         //   width: MediaQuery.of(context).size.width * 1.0,
@@ -420,9 +434,13 @@ bool isLoading=false;
         //       ),
         //     )),
         Divider(
-          thickness: 5.0,
+          thickness: 2.0,
+          color: Colors.orange,
         ),
+        Container(
+        padding:new EdgeInsets.all(5.0),),
         SizedBox(
+          
           //  height: MediaQuery.of(context).size.height * 0.2,
           // width: MediaQuery.of(context).size.width * 0.98,
           child:Column(
@@ -470,20 +488,26 @@ bool isLoading=false;
                               Navigator.pushNamed(context,"/refund");
                              },
                            ),
-                          //    ListTile( 
-                          //    title: new Text('Logout'),
-                          //    leading: new Icon(Icons.settings_phone),
-                          //    onTap: () {
-                          //     showAlertDialog(context);
-                          //    },
-                          //  ),
-                              RaisedButton(
-                                // elevation: 50.0,
-                                child: Text('Logout',style: TextStyle(fontSize: 20.0),),
-                                textColor: Colors.white,
-                                color: Colors.red,
-                                onPressed: () => {showAlertDialog(context)},
-                              )
+                             ListTile( 
+                             title: new Text('Logout',
+                             style: TextStyle(fontSize: 20.0
+                              // color:Colors.deepOrange
+                              ),
+                             ),
+                             leading: new Icon(Icons.settings_power,
+                            //  color: Colors.deepOrange,
+                             ),
+                             onTap: () {
+                              showAlertDialog(context);
+                             },
+                           ),
+                              // RaisedButton(
+                              //   // elevation: 50.0,
+                              //   child: Text('Logout',style: TextStyle(fontSize: 20.0),),
+                              //   textColor: Colors.white,
+                              //   color: Colors.red,
+                              //   onPressed: () => {showAlertDialog(context)},
+                              // )
             ]
           )
         ),

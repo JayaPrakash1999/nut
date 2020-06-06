@@ -13,6 +13,8 @@ import 'currentUser.dart';
 import 'details.dart';
 import 'home.dart';
 import 'account.dart';
+import 'orderConfirmation.dart';
+import 'global.dart' as global;
 
 bool selection1 = false;
 
@@ -315,6 +317,7 @@ void openCheckoutweek() async {
 
 
 void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+  // String selectedPlan=global.subPlan;
   Fluttertoast.showToast(
     msg: "SUCCESS: " + response.paymentId,
   );
@@ -323,8 +326,11 @@ void _handlePaymentSuccess(PaymentSuccessResponse response) async {
 FirebaseUser user = await FirebaseAuth.instance.currentUser();
   print("current user id");
   print(user.uid);
+  
    final Firestore fireStore =  Firestore.instance;
+
   await fireStore.collection("users").document(user.uid).updateData({
+    "subPlan": global.subPlan,
     "subscription": true
 });
     print("updated");

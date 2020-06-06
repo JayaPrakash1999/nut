@@ -159,7 +159,11 @@ class ContactUs extends StatelessWidget {
                   onTap: () {
                     _launchMaps("26.713500", "88.424280");
                   },
-                  child: Icon(Icons.directions, color: Colors.green,)
+                  child: Row(children: <Widget>[
+                    Icon(Icons.directions, color: Colors.green,),
+                    Text("      ")
+                  ],)
+                  // 
                 )
               ],
             ),
@@ -184,8 +188,13 @@ class ContactUs extends StatelessWidget {
                   onTap: () {
                     _LaunchPhone("8617587964");
                   },
-                  child: Icon(Icons.phone, color: Colors.green,)
-                )
+                  child: 
+                  Row(children: <Widget>[Icon(Icons.phone, color: Colors.green,),
+                
+                    Text("      ")
+                  ],
+                  )
+                  )
               ],
             ),
           ),
@@ -199,7 +208,11 @@ class ContactUs extends StatelessWidget {
                   onTap: () {
                     _LaunchPhone("9647837544");
                   },
-                  child: Icon(Icons.phone, color: Colors.green,)
+                  child: Row(children: <Widget>[Icon(Icons.phone, color: Colors.green,),
+                
+                    Text("      ")
+                  ],
+                  )
                 )
               ],
             ),
@@ -222,8 +235,11 @@ class ContactUs extends StatelessWidget {
                 onTap: () {
                   _launchEmail("info@mynutshell.in");
                 },
-                child: Icon(Icons.email, color: Colors.green,)
-              )
+                child: 
+                Row(children: <Widget>[Icon(Icons.email, color: Colors.green,),
+                    Text("      ")
+                  ],
+                  )              )
             ]
           )
         ],

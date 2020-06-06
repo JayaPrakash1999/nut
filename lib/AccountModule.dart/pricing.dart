@@ -16,6 +16,7 @@ class _PricingState extends State<Pricing> {
 
   Users get getCurrentUser => _currentUser;
 bool isLoading=false;
+  String Plan;
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<String> onStartUp() async {
@@ -58,6 +59,26 @@ bool isLoading=false;
 
   @override
   Widget build(BuildContext context) {
+    if(_currentUser.subPlan=='f')
+    {
+      Plan="Free";
+
+    }
+    else if(_currentUser.subPlan=='b')
+    {
+      Plan="Basic";
+
+    }
+    else if(_currentUser.subPlan=='s')
+    {
+      Plan="Standard";
+
+    }
+    else if(_currentUser.subPlan=='p')
+    {
+      Plan="Premium";
+
+    }
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -78,7 +99,9 @@ bool isLoading=false;
           },
         ),
         ),
-        body:WillPopScope(
+        body:isLoading?
+      Center(child: CircularProgressIndicator(),):
+        WillPopScope(
           onWillPop: (){
             Navigator.pushNamed(context, '/account');
           },
@@ -86,13 +109,15 @@ bool isLoading=false;
           children: <Widget>[
 
               SizedBox(
-                height: 200,
-                width: 200,
+                // height: 200,
+                // width: 200,
                 child:Column(children: <Widget>[
-                  // Text("Your Group is:"),
-                  //  Text(_currentUser.group.toString())
-                  Text("Will be added")
-              
+                  Text("   \n\n         Your Subsciption type is  is:",style: TextStyle(fontSize:20.0),),
+                   Text(Plan,style: TextStyle(fontSize:25.0),),
+                  // Text("Will be added")
+                _currentUser.subPlan.toString()=='f'?Text("Price: ₹0\nPlan:FREE includes:\nDuration: 7 days\n No. of paperbacks:2\nIssues:2"):_currentUser.subPlan.toString()=='b'? Text("Price: ₹69\nPlan:Basic includes:\nDuration: 2 months\n No. of paperbacks:1\nIssues:1"):_currentUser.subPlan.toString()=='s'?Text("Price: ₹56 per issue\nPlan:Standard includes:\nDuration: 6 months\n No. of paperbacks:3\n"):
+         _currentUser.subPlan.toString()=='p'? Text("Price: ₹50 per issue\nPlan:Standard includes:\nDuration: 12 months\n No. of paperbacks:6\n"):Text("Error"),
+         
                 ],)
               ),
               

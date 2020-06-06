@@ -4,10 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'global.dart' as global;
+
 import 'database.dart';
 import 'details.dart';
 
 class OrderConfirmation extends StatelessWidget {
+  // String subPlan;
 
   FirebaseAuth auth = FirebaseAuth.instance;
 void inputData() async {
@@ -57,21 +61,21 @@ void inputData() async {
          child: FlatButton(onPressed:(){
              if (payone==1) {
                   print("proceeding to checkout pay1");
-
+                  global.subPlan="b";
                   openCheckout();
                   // print("proceeding to checkout pay1");
                 }else if (payfree== 1) {
-                  
+                  global.subPlan="f";
                   print("proceeding to checkout payfree");
                   showAlertDialog(context);
                   // openCheckoutweek();
                 } 
                 else if (paytwo== 1) {
-                  
+                  global.subPlan="s";
                   print("proceeding to checkout pay2");
                   openCheckoutthree();
                 } else if (paythree==1) {
-                  
+                  global.subPlan="p";
                   print("proceeding to checkout pay3");
                   openCheckoutyear();
                 }
@@ -109,26 +113,49 @@ showAlertDialog(BuildContext context) {
       //  signOutGoogle();
                 //  OurDatabase().freesubscription(user.uid);
                 // OurDatabase().createUser(_currentUser);
+                CallForFreeUpdation();
+                                Navigator.of(context)
+                                    .pushNamedAndRemoveUntil('/home', (_) => false);},
+                  );
                 
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/home', (_) => false);},
-  );
+                  // set up the AlertDialog
+                  AlertDialog alert = AlertDialog(
+                    title: Text("Free plan"),
+                    content: Text(" Your free subscription plan ends in 7 days, Continue to Homescreen"),
+                    actions: [
+                      // cancelButton,
+                      continueButton,
+                    ],
+                  );
+                
+                  // show the dialog
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },
+                  );
+                }
+                
+void CallForFreeUpdation() async {
 
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("Free plan"),
-    content: Text(" Your free subscription plan ends in 7 days, Continue to Homescreen"),
-    actions: [
-      // cancelButton,
-      continueButton,
-    ],
-  );
+  try{
+FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  print("current user id");
+  print(user.uid);
+  
+   final Firestore fireStore =  Firestore.instance;
 
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+  await fireStore.collection("users").document(user.uid).updateData({
+    "subPlan": global.subPlan,
+    "subscription": true
+});
+    print("updated");
+
+}
+catch(e){
+  print(e.toString());
+}
+
+print("account page");
 }

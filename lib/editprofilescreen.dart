@@ -330,9 +330,9 @@ TextEditingController _fnamecontroller = TextEditingController();
 TextEditingController _lnamecontroller = TextEditingController();
 TextEditingController _schoolcontroller = TextEditingController();
 TextEditingController _classcontroller = TextEditingController();
-TextEditingController _emailcontroller = TextEditingController();
-TextEditingController _phonecontroller = TextEditingController();
-TextEditingController _citycontroller = TextEditingController();
+// TextEditingController _emailcontroller = TextEditingController();
+// TextEditingController _phonecontroller = TextEditingController();
+// TextEditingController _citycontroller = TextEditingController();
 
 //  _fnamecontroller = 
 //  _lnamecontroller = 
@@ -370,14 +370,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         isLoading=true;
         _dropformSelected=_currentUser.group==null?"Group-A":_currentUser.group.toString();
-        // _fnamecontroller = ;
- 
-        //  _lnamecontroller = _currentUser.lname.toString() as TextEditingController;
-        //   _schoolcontroller = 
-        //   _classcontroller = 
-        //   _emailcontroller =
-        //   _phonecontroller = 
-        //   _citycontroller =  
+       
 
       });
       FirebaseUser _firebaseUser = await _auth.currentUser();
@@ -567,7 +560,7 @@ var _dropforms= [
      bool selected = false;
     return ListView(
        children: <Widget>[
-         
+      Text("\n"),
      Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -644,18 +637,18 @@ var _dropforms= [
         //       }),
         // ),
         Padding(padding: EdgeInsets.all(10)),
-        SizedBox(
-          width: 320,
-          child: TextFormField(
-              controller: _citycontroller,
-              autovalidate: true,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Enter City',hintText: _currentUser.city.toString()),
-              validator: validateCity,
-              onSaved: (String value) {
-                _currentUser.city = value;
-              }),
-        ),
+        // SizedBox(
+        //   width: 320,
+        //   child: TextFormField(
+        //       controller: _citycontroller,
+        //       autovalidate: true,
+        //       keyboardType: TextInputType.text,
+        //       decoration: InputDecoration(labelText: 'Enter City',hintText: _currentUser.city.toString()),
+        //       validator: validateCity,
+        //       onSaved: (String value) {
+        //         _currentUser.city = value;
+        //       }),
+        // ),
       //   Padding(padding: EdgeInsets.all(10)),
       //   SizedBox(
       //     width: 320,
@@ -674,11 +667,21 @@ var _dropforms= [
         Padding(padding: EdgeInsets.all(10)),
         SizedBox( 
           width: 320,
-          child: Text("Select Group\n1.Group A Suitable for students of ages 9-12\n2.Suitable for students of ages 13-1"),
+          child: Column(
+            children: <Widget>[
+              Text("Select Group",style: TextStyle(color:Colors.black,fontSize: 20.0),),
+              Text("\n1. Group A Suitable for students of ages 9-12\n2. Suitable for students of ages 13-1"),
+              // Text("Suitable for students of ages 9-12")"),)
+
+            ],
+          ),
+          // Text("Select Group",),
+
+          // 1. Group A Suitable for students of ages 9-12\n2. Suitable for students of ages 13-1"),
       //         Text("Suitable for students of ages 9-12")"),
           // height: MediaQuery.of(context).size.height / 6,
         ),
-        Padding(padding: EdgeInsets.all(10)),
+        Padding(padding: EdgeInsets.only(left:10)),
          SizedBox( 
           width: 320,
                         child:DropdownButton<String>(
@@ -752,7 +755,7 @@ var _dropforms= [
         child: GestureDetector(
           onTap: () {
               sendToServer();
-            Navigator.pushNamed(context,"/account");
+           
             // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirmation()));
           },
           child: Container(
@@ -784,6 +787,7 @@ var _dropforms= [
     if (_formKey.currentState.validate()) {
       // No any error in validation
       _formKey.currentState.save();
+       Navigator.pushNamed(context,"/account");
       print("CLicked successfully");
       OurDatabase().updateDetails(_currentUser);   
       print("updated user user");

@@ -21,11 +21,11 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   AnimationController _mainLogoAnimationController;
 bool _isLoading=false;
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     
      _mainLogoAnimationController = new AnimationController(
-        duration: new Duration(milliseconds: 2000), vsync: this);
+        duration: new Duration(milliseconds: 5000), vsync: this);
     _mainLogoAnimation = new CurvedAnimation(
         parent: _mainLogoAnimationController, curve: Curves.easeIn);
     _mainLogoAnimation.addListener(() => (this.setState(() {})));
@@ -37,28 +37,28 @@ bool _isLoading=false;
  Future existingUser() async {
      final Firestore _firestore = Firestore.instance;
 
-//  await new Future.delayed(const Duration(milliseconds: 2000));
  try{
 FirebaseUser user = await FirebaseAuth.instance.currentUser();
  print(user.toString());
 
   if(user!=null ){
      DocumentSnapshot _docSnap = await _firestore.collection("users").document(user.uid).get();
-
+    
+    await new Future.delayed(const Duration(milliseconds: 5000));  
     if(_docSnap.data['subscription'])
+    {
      Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
+    }
     else
     {
       Navigator.pushNamed(context,"/subs");
     }
-  }
+  } 
   else{
-
       // Navigator.pushNamedAndRemoveUntil(context, '/intro', (_) => false);
     // goToLoginPage();
-    
-//  await new Future.delayed(const Duration(milliseconds: 2000));
-      Navigator.pushNamedAndRemoveUntil(context, "/intro", (_) => false);
+  await new Future.delayed(const Duration(milliseconds: 5000));
+  Navigator.pushNamedAndRemoveUntil(context, "/intro", (_) => false);
   
   }
  }catch(e){

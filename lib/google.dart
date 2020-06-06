@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nutshell/database.dart';
 import 'package:nutshell/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'navigate.dart';
 
@@ -35,6 +36,7 @@ Users _currentUser = Users();
 
 Users get getCurrentUser => _currentUser;
 Future<String> signInWithGoogle(BuildContext context) async {
+  final Firestore _firestore = Firestore.instance;
   String retVal = "error";
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -45,12 +47,15 @@ Future<String> signInWithGoogle(BuildContext context) async {
   Users _user = Users();
 
   try {
+    
     GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication _googleAuth = await _googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
         idToken: _googleAuth.idToken, accessToken: _googleAuth.accessToken);
 
    final AuthResult _authResult = await _auth.signInWithCredential(credential);
+   
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (_authResult.additionalUserInfo.isNewUser) {
       print("new user");
       _user.uid = _authResult.user.uid;
@@ -64,10 +69,23 @@ Future<String> signInWithGoogle(BuildContext context) async {
     }
     else {
       print("existing user");
+      DocumentSnapshot _docSnap = await _firestore.collection("users").document(user.uid).get();
+    
+      if(_docSnap.data['subscription'])
+      {
+          print("Already subscribed");
        Navigator.pushNamedAndRemoveUntil(context, "/home",  (_)=> false);
-    }
+    
+      }
+      else
+      {
+        print("going for subscription");
+        Navigator.pushNamed(context,"/subs");
+      }
+      }
     _currentUser = await OurDatabase().getUserInfo(_authResult.user.uid);
-    if (_currentUser != null) {
+   
+     if (_currentUser != null) {
       retVal = "success";
     }
   } on PlatformException catch (e) {
